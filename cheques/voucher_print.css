@@ -1,0 +1,31 @@
+
+
+@media print {
+
+    #header {display:none;}
+    #content {display:none;}
+    #comments {display:none;}
+    #sidebar {display:none;}
+    #footer {display:none;}
+    .site-description {display:none;}
+    .site-title {display:none;}
+
+
+    html, body{
+        width: 21.59cm;
+        height: 27.94cm;
+        font-family: "Times New Roman",Times,serif;
+    }
+
+    @page {
+        size: 21.59cm 27.94cm;
+        margin-top: 0cm;
+        margin-right: 0cm;
+        margin-left: 0cm;
+        margin-bottom: 0cm;
+    }
+}
+
+div.inline { float:left; }
+.clearBoth { clear:both; }
+

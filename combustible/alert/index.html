@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Alertify</title>
+	<link rel="stylesheet" type="text/css" href="../../assets/js/plugins/alertifyjs/alertify.js">
+	<link rel="stylesheet" type="text/css" href="../../assets/js/plugins/alertifyjs/css/themes/default.css">
+
+	<script src="../../assets/js/plugins/jquery-3.2.1.min.js"></script>
+	<script src="../../assets/js/plugins/alertifyjs/alertify.js"></script>
+</head>
+
+<body>
+	<button id="ejecuta">Ejecutar mensaje</button>
+</body>
+</html>
+
+	<script type="text/javascript">
+
+		$(document).ready(function(){
+			
+			$('#ejecuta').click(function(){
+		//		alertify.confirm('Eliminar datos', '¿Seguro que deseas eliminar?', function(){ alertify.success('Ok') }
+             //   , function(){ alertify.error('Cancel')});
+				 //alertify.alert("te hace falta llenar mas campos, por favor");
+				alertify.error("fallo el servidor :(");
+				//alertify.success("este es un mensaje de exito ");
+			});
+		})
+	</script>
