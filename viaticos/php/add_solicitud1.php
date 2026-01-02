@@ -11,7 +11,7 @@ $objetivos = $_POST['objetivo'];  /// ya no usar
 $especificacion = $_POST['especificacion'];  // tiempo en 
 $departamento = $_POST['dep'];  // cod nombramiento
 $lugares = $_POST['lugar'];  // lugares
-$year1 = $_POST['year'];  // A;o del sistema
+$year1 = $_POST['year'];  // Año del sistema (se sobrescribirá con el año de la fecha de inicio)
 $status = "1";
 
 $id = $_POST['id'];   // persona peticion 
@@ -20,23 +20,23 @@ $persona = User::get_empleado_datos_id($id);
 $pdo = Database::connect();
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-
-
-
-$sql1 = "SELECT dep_encargado, dep from vp_deptos WHERE dep_id=?";
+$sql1 = "SELECT dep_encargado, dep 
+        from vp_deptos 
+        WHERE dep_id=?";
 $p1 = $pdo->prepare($sql1);
 $p1->execute(array($persona['dep_id']));
 $per_rol = $p1->fetch(PDO::FETCH_ASSOC);
 $enc = $per_rol['dep_encargado']; //perosona autoriza
 $dep1 = $per_rol['dep'];
 
-
-
-$sql2 = "SELECT MAX(contador)+1 AS con from vs_nombramiento where dep_f1=?";
+$year1 = date('Y', strtotime($date1));
+$sql2 = "SELECT COALESCE(MAX(contador),0)+1 AS con 
+        FROM vs_nombramiento 
+        WHERE dep_f1=? AND YEAR(fecha_inicio)=?";
 $p2 = $pdo->prepare($sql2);
-$p2->execute(array($persona['dep_id']));
+$p2->execute(array($persona['dep_id'], $year1));
 $per_rol2 = $p2->fetch(PDO::FETCH_ASSOC);
-$con1 = $per_rol2['con']; //perosona autoriza
+$con1 = $per_rol2['con']; // próximo contador para el mismo departamento y año
 
 $codigo5 = $dep1 . $con1 . "-" . $year1;
 
